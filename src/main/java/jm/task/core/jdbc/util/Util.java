@@ -13,19 +13,20 @@ public class Util {
     private static final String connectionURL = "jdbc:mysql://localhost:3306/mysql?useSSL=false&serverTimezone=UTC";
     private static final String passwordUser = "Matrix%1989";
     private static final String userName = "root";
+    private static final Environment env = null;
     private static SessionFactory newSession;
 
     static  {
         try {
             Configuration configuration = new Configuration();
             Properties settings = new Properties();
-            settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-            settings.put(Environment.URL, connectionURL);
-            settings.put(Environment.USER, userName);
-            settings.put(Environment.PASS, passwordUser);
-            settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-            settings.put(Environment.SHOW_SQL, "true");
-            settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
+            settings.put(env.DRIVER, "com.mysql.cj.jdbc.Driver");
+            settings.put(env.URL, connectionURL);
+            settings.put(env.USER, userName);
+            settings.put(env.PASS, passwordUser);
+            settings.put(env.DIALECT, "org.hibernate.dialect.MySQLDialect");
+            settings.put(env.SHOW_SQL, "true");
+            settings.put(env.CURRENT_SESSION_CONTEXT_CLASS, "thread");
             configuration.setProperties(settings);
             configuration.addAnnotatedClass(User.class);
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
