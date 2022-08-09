@@ -8,9 +8,8 @@ import org.hibernate.cfg.Environment;
 import org.hibernate.service.ServiceRegistry;
 import java.util.Properties;
 
-
 public class Util {
-    private static final String connectionURL = "jdbc:mysql://localhost:3306/mysql?useSSL=false&serverTimezone=UTC";
+    private static final String connectionURL = "jdbc:mysql://localhost:3306/mysql";// + "&useSSL=false" + "&serverTimezone=UTC";
     private static final String passwordUser = "Matrix%1989";
     private static final String userName = "root";
     private static final Environment env = null;
