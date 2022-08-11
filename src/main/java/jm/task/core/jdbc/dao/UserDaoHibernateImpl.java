@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -27,8 +28,12 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createNativeQuery(SQL_CREATE_TABLE, User.class).executeUpdate();
             transaction.commit();
-        } catch (RuntimeException e) {
-            Objects.requireNonNull(transaction).rollback();
+        } catch (Exception e) {
+            try {
+                Objects.requireNonNull(transaction).rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -39,8 +44,12 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createNativeQuery(SQL_DELETE_TABLE, User.class).executeUpdate();
             transaction.commit();
-        } catch (RuntimeException e) {
-            Objects.requireNonNull(transaction).rollback();
+        } catch (Exception e) {
+            try {
+                Objects.requireNonNull(transaction).rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -55,8 +64,12 @@ public class UserDaoHibernateImpl implements UserDao {
             newUser.setAge(age);
             session.save(newUser);
             transaction.commit();
-        } catch (RuntimeException e) {
-            Objects.requireNonNull(transaction).rollback();
+        } catch (Exception e) {
+            try {
+                Objects.requireNonNull(transaction).rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -68,8 +81,12 @@ public class UserDaoHibernateImpl implements UserDao {
             User delUser = session.get(User.class, id);
             session.delete(delUser);
             transaction.commit();
-        } catch (RuntimeException e) {
-            Objects.requireNonNull(transaction).rollback();
+        } catch (Exception e) {
+            try {
+                Objects.requireNonNull(transaction).rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 
@@ -97,8 +114,12 @@ public class UserDaoHibernateImpl implements UserDao {
                 session.delete(e);
             }
             transaction.commit();
-        } catch (RuntimeException e) {
-            Objects.requireNonNull(transaction).rollback();
+        } catch (Exception e) {
+            try {
+                Objects.requireNonNull(transaction).rollback();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
     }
 }
